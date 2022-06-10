@@ -1,0 +1,21 @@
+
+declare @t table (name varchar(255))
+insert into @t
+select 'Киев'
+union all
+select 'Киев Моссква'
+union all
+select 'Киев Моссква Киев'
+union all
+select 'Киев Моссква Киев Киев Моссква Киев'
+union all
+select 'Киев Моссква'
+union all
+select 'Киев Моссква Киев'
+
+
+declare @str varchar(max)
+set @str=''
+select @str=@str+' '+name from @t
+set @str='select '''+replace(ltrim(@str), ' ', ''' as City union all select ''')+''''
+exec(@str)
